@@ -15,7 +15,8 @@
                             @foreach ($tasks as $task)
                             <li class="border rounded-lg p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
                                 <div>
-                                    <h3 class="text-lg font-semibold">{{ $task->title }}</h3>
+                                    <h3 class="text-lg font-semibold">{{ $task->title}}</h3>
+                                    <p class="text-gray-600">{{ $task->id }}</p>
                                     <p class="text-gray-600">{{ $task->text }}</p>
                                     <p class="text-gray-500 mt-2">Deadline: {{ $task->deadline }}</p>
                                 </div>
@@ -25,7 +26,6 @@
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mb-2 md:mb-0">Delete</button>
                                     </form>
-                                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
                                 </div>
                             </li>
                             @endforeach
@@ -56,6 +56,38 @@
                             </div>
                         </form>
                     </div>
+
+    <div class="mt-8 p-4 bg-white shadow rounded">
+    <h2 class="text-xl font-bold">Edit Task</h2>
+
+    <form action="{{ route('tasks.update') }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="mb-4">
+            <label for="edit-task-title" class="block text-sm font-medium text-gray-700">Id</label>
+            <input type="text" id="edit-task-title" name="id" value="" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="edit-task-title" class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" id="edit-task-title" name="title" value="" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        
+        <div class="mb-4">
+            <label for="edit-task-text" class="block text-sm font-medium text-gray-700">Text</label>
+            <textarea id="edit-task-text" name="text" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+        </div>
+        
+        <div class="mb-4">
+            <label for="edit-task-deadline" class="block text-sm font-medium text-gray-700">Deadline</label>
+            <input type="date" id="edit-task-deadline" name="deadline" value="" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        
+        <div class="mt-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Task</button>
+        </div>
+    </form>
+</div>
                 </div>
             </div>
         </div>

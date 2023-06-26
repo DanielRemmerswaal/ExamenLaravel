@@ -47,4 +47,28 @@ class TaskController extends Controller
     
         return redirect()->back();
     }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'title' => 'required|max:255',
+            'text' => 'required',
+            'deadline' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $task = Task::findOrFail($request->input('id'));
+
+        $task->title = $request->input('id');
+        $task->text = $request->input('text');
+        $task->deadline = $request->input('deadline');
+
+        $task->save();
+
+        return redirect()->back();
+    }
 }

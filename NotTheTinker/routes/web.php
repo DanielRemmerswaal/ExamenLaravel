@@ -28,5 +28,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/dashboard', [TaskController::class, 'create'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-
+route::post('/tasks/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
+route::put('/tasks', [TaskController::class, 'update'])->name('tasks.update');
 require __DIR__.'/auth.php';
